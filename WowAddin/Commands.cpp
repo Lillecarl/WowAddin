@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <sstream>
 
 ClientServices s_client;
 ObjectMgr s_objMgr;
@@ -69,6 +70,27 @@ BOOL CCommand_DBLookup(char const* cmd, char const* args)
     data.PutString(args);
     data.Finalize();
     s_client.SendPacket(&data);
+
+    return TRUE;
+}
+
+BOOL CCommand_KillServer(char const* cmd, char const* args)
+{
+    long killmuch = atoi(args);
+
+    for (long i = 0; i < killmuch; ++i)
+    {
+        CDataStore data;
+        data.PutInt32(CMSG_CHAR_ENUM);
+        data.Finalize();
+        s_client.SendPacket(&data);
+        Console::Write("", ECHO_COLOR);
+    }
+
+    std::ostringstream ss;
+    ss << "Sent CMSG_CHAR_ENUM " << killmuch << " times";
+
+    Console::Write(ss.str().c_str(), ECHO_COLOR);
 
     return TRUE;
 }

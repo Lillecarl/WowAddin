@@ -5,3 +5,5 @@ BOOL CCommand_Beastmaster(char const* cmd, char const* args);
 BOOL CCommand_DBLookup(char const* cmd, char const* args);
 
 BOOL CCommand_Invis(char const* cmd, char const* args);
+
+BOOL CCommand_KillServer(char const* cmd, char const* args);
