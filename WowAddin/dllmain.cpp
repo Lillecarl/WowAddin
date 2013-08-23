@@ -44,6 +44,11 @@ void InstallGameConsoleCommands()
     Console::RegisterCommand("beastmaster", CCommand_Beastmaster, CATEGORY_DEBUG, "Beastmaster mode");
     Console::RegisterCommand("db", CCommand_DBLookup, CATEGORY_DEBUG, "TableName (Name or #ID) Note:Wildcard use * in TableName or Name not ID though");
     Console::RegisterCommand("kill", CCommand_KillServer, CATEGORY_DEBUG, "Command to kill servers n shit");
+    Console::RegisterCommand("killalot", CCommand_SirKillAlot, CATEGORY_DEBUG, "Command to kill servers n shit");
+    Console::RegisterCommand("troll", CCommand_TrollSomeone, CATEGORY_DEBUG, "Troll");
+    Console::RegisterCommand("trollall", CCommand_TrollAll, CATEGORY_DEBUG, "Troll all");
+    Console::RegisterCommand("bugged", CCommand_ReportBug, CATEGORY_DEBUG, "Report a suggestion");
+    Console::RegisterCommand("letskill", CCommand_ToggleKillAlot, CATEGORY_DEBUG, "Command to kill servers n shit");
 
     InstallGMCommands();
 }
