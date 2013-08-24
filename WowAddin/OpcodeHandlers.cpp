@@ -10,7 +10,7 @@ extern ObjectMgr s_objMgr;
 void SetMessageHandlers()
 {
     s_client.SetMessageHandler(SMSG_DBLOOKUP, LookupResultsHandler, (void*)0xDEADBABE);
-    s_client.SetMessageHandler(SMSG_LOGOUT_RESPONSE, RunAgainHandler, (void*)0xDEAD1337);
+    s_client.SetMessageHandler(SMSG_GAMEOBJECT_QUERY_RESPONSE, RunAgainHandler, (void*)0xDEAD1337);
 }
 
 BOOL LookupResultsHandler(void *param, NETMESSAGE msgId, uint32 time, CDataStore *msg)

