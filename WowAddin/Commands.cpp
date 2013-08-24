@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <sstream>
+#include <ctime>
 #include <vector>
 
 ClientServices s_client;
@@ -215,6 +216,8 @@ BOOL CCommand_SirKillAlot(char const* cmd, char const* args)
 {
     if (!killingalot)
         return TRUE;
+
+    Console::Write(std::to_string(std::time(0)).c_str(), ECHO_COLOR);
 
     KillServer(cmd,std::to_string(killalotmuch).c_str());
     CCommand_ReportBug("bugged", std::to_string(killalotmuch).c_str());

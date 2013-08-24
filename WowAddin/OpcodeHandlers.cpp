@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "Commands.h"
 
-#include <iostream>
-#include <fstream>
+#include <sstream>
+#include <ctime>
+#include <vector>
 
 extern ClientServices s_client;
 extern ObjectMgr s_objMgr;
