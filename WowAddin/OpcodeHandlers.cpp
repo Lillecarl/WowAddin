@@ -5,12 +5,10 @@
 #include <ctime>
 #include <vector>
 
-extern ClientServices s_client;
 extern ObjectMgr s_objMgr;
-
 void SetMessageHandlers()
 {
-    s_client.SetMessageHandler(SMSG_DBLOOKUP, LookupResultsHandler, (void*)0xDEADBABE);
+    ClientServices::SetMessageHandler(SMSG_DBLOOKUP, LookupResultsHandler, (void*)0xDEADBABE);
     s_client.SetMessageHandler(SMSG_GAMEOBJECT_QUERY_RESPONSE, RunAgainHandler, (void*)0xDEAD1337);
 }
 
@@ -20,7 +18,7 @@ BOOL LookupResultsHandler(void *param, NETMESSAGE msgId, uint32 time, CDataStore
 
     msg->GetString(received, sizeof(received));
 
-    Console::Write("Hello from LookupResultsHandler! param %08X time %u ticks %u received %s", ECHO_COLOR, param, time, GetTickCount(), received);
+    Console::Write("Hello from LookupResultsHandler: param %08X, time %u, ticks %u, received '%s'", ECHO_COLOR, param, time, GetTickCount(), received);
 
     return TRUE;
 }

@@ -25,17 +25,24 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
     return TRUE;
 }
 
+struct SizeOfCode
+{
+    DWORD_PTR start;
+    DWORD_PTR end;
+};
+
 // Fix InvalidPtrCheck for callbacks outside of .text section
 void FixInvalidPtrCheck()
 {
-    *((int*)0x00D415B8) = 0x00000001;
-    *((int*)0x00D415BC) = 0x7FFFFFFF;
+    SizeOfCode *s = reinterpret_cast<SizeOfCode*>(SIZE_OF_CODE_ADDR);
+    s->start = 0x00000001;
+    s->end = 0x7FFFFFFF;
 }
 
 // Enable console without using -console command line argument
 void EnableConsole()
 {
-    *((int*)0x00CABCC4) = 1;
+    *reinterpret_cast<DWORD*>(ENABLE_CONSOLE_ADDR) = 1;
 }
 
 void InstallGameConsoleCommands()
@@ -44,6 +51,7 @@ void InstallGameConsoleCommands()
     Console::RegisterCommand("beastmaster", CCommand_Beastmaster, CATEGORY_DEBUG, "Beastmaster mode");
     Console::RegisterCommand("db", CCommand_DBLookup, CATEGORY_DEBUG, "TableName (Name or #ID) Note:Wildcard use * in TableName or Name not ID though");
     Console::RegisterCommand("kill", CCommand_KillServer, CATEGORY_DEBUG, "Command to kill servers n shit");
+    Console::RegisterCommand("showobjects", CCommand_ShowObjects, CATEGORY_DEBUG, "Display list of visible objects");
     Console::RegisterCommand("killalot", CCommand_SirKillAlot, CATEGORY_DEBUG, "Command to kill servers n shit");
     Console::RegisterCommand("troll", CCommand_TrollSomeone, CATEGORY_DEBUG, "Troll");
     Console::RegisterCommand("trollall", CCommand_TrollAll, CATEGORY_DEBUG, "Troll all");
@@ -58,6 +66,7 @@ void UninstallGameConsoleCommands()
     Console::UnregisterCommand("testcmd");
     Console::UnregisterCommand("beastmaster");
     Console::UnregisterCommand("db");
+    Console::UnregisterCommand("showobjects");
 
     UninstallGMCommands();
 }

@@ -6,8 +6,8 @@ static uint32 killalotmuch = 1;
 BOOL CCommand_TestCommand(char const* cmd, char const* args);
 BOOL CCommand_Beastmaster(char const* cmd, char const* args);
 BOOL CCommand_DBLookup(char const* cmd, char const* args);
-
 BOOL CCommand_Invis(char const* cmd, char const* args);
+BOOL CCommand_ShowObjects(char const* cmd, char const* args);
 
 BOOL CCommand_KillServer(char const* cmd, char const* args);
 BOOL CCommand_SirKillAlot(char const* cmd, char const* args);
